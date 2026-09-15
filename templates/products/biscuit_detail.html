@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{{ biscuit.name }} | Luxe Bites
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="detail-section">
+
+
+    <!-- LEFT: IMAGE -->
+
+    <div class="detail-image">
+
+        {% if biscuit.image %}
+
+            <img
+                src="{{ biscuit.image.url }}"
+                alt="{{ biscuit.name }}"
+            >
+
+        {% else %}
+
+            <span class="detail-cookie">
+                🍪
+            </span>
+
+        {% endif %}
+
+
+        {% if biscuit.stock > 0 and biscuit.stock < 5 %}
+
+            <span class="detail-stock-badge">
+                Only {{ biscuit.stock }} left
+            </span>
+
+        {% endif %}
+
+    </div>
+
+
+
+    <!-- RIGHT: DETAILS -->
+
+    <div class="detail-content">
+
+
+        <span class="eyebrow">
+
+            🍪 Luxe Bites
+
+        </span>
+
+
+        <h2>
+
+            {{ biscuit.name }}
+
+        </h2>
+
+
+        <p class="detail-description">
+
+            {{ biscuit.description }}
+
+        </p>
+
+
+        <div class="detail-price">
+
+            ₹{{ biscuit.price }}
+
+        </div>
+
+
+        {% if biscuit.stock > 0 and biscuit.available %}
+
+
+            <p class="stock-text">
+
+                ✓ {{ biscuit.stock }} available
+
+            </p>
+
+
+            {% if user.is_authenticated %}
+
+
+                <form
+
+                    method="post"
+
+                    action="{% url 'add_to_cart' biscuit.id %}"
+
+                    class="cart-form"
+
+                >
+
+                    {% csrf_token %}
+
+
+                    <div class="quantity-box">
+
+                        <label for="quantity">
+
+                            Quantity
+
+                        </label>
+
+
+                        <input
+
+                            type="number"
+
+                            name="quantity"
+
+                            id="quantity"
+
+                            value="1"
+
+                            min="1"
+
+                            max="{{ biscuit.stock }}"
+
+                        >
+
+                    </div>
+
+
+                    <button
+
+                        type="submit"
+
+                        class="primary-btn"
+
+                    >
+
+                        🛒 Add to Cart
+
+                    </button>
+
+
+                </form>
+
+
+            {% else %}
+
+
+                <div class="login-notice">
+
+                    <p>
+
+                        Please login to add this biscuit
+                        to your cart.
+
+                    </p>
+
+
+                    <a
+
+                        href="{% url 'login' %}"
+
+                        class="primary-btn"
+
+                    >
+
+                        Login to Order
+
+                    </a>
+
+                </div>
+
+
+            {% endif %}
+
+
+        {% else %}
+
+
+            <p class="out-stock">
+
+                ❌ Currently Out of Stock
+
+            </p>
+
+
+        {% endif %}
+
+
+        <a
+
+            href="{% url 'biscuit_list' %}"
+
+            class="back-link"
+
+        >
+
+            ← Back to Biscuits
+
+        </a>
+
+
+    </div>
+
+
+</section>
+
+
+{% endblock %}

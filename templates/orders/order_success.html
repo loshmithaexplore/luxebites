@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Order Confirmed | Luxe Bites
+{% endblock %}
+
+{% block content %}
+
+<section class="success-section">
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+    <span class="eyebrow">
+        Order Confirmed
+    </span>
+
+    <h2>
+        Thank You for Your Order!
+    </h2>
+
+    <p>
+        Your delicious Luxe Bites are being prepared.
+    </p>
+
+    <div class="success-buttons">
+
+        <a
+            href="{% url 'myorders' %}"
+            class="primary-btn"
+        >
+            View My Orders
+        </a>
+
+        <a
+            href="{% url 'biscuit_list' %}"
+            class="secondary-btn"
+        >
+            Continue Shopping
+        </a>
+
+    </div>
+
+</section>
+
+{% endblock %}

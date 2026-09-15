@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Biscuits | Luxe Bites
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <span class="eyebrow">
+        Freshly Baked
+    </span>
+
+    <h2>
+        Our Delicious Biscuits
+    </h2>
+
+    <p>
+        Handpicked favorites made for your sweetest moments.
+    </p>
+
+</section>
+
+
+<section class="products-grid">
+
+    {% for biscuit in biscuits %}
+
+    <article class="product-card">
+
+        <!-- Biscuit Image -->
+        <div class="product-image">
+
+            {% if biscuit.image %}
+
+                <img
+                    src="{{ biscuit.image.url }}"
+                    alt="{{ biscuit.name }}"
+                >
+
+            {% else %}
+
+                <span class="cookie-emoji">
+                    🍪
+                </span>
+
+            {% endif %}
+
+
+            <!-- Stock Badge -->
+
+            {% if biscuit.stock == 0 %}
+
+                <span class="stock-badge out-of-stock">
+                    Out of Stock
+                </span>
+
+            {% elif biscuit.stock < 5 %}
+
+                <span class="stock-badge">
+                    Only {{ biscuit.stock }} left
+                </span>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Product Information -->
+
+        <div class="product-info">
+
+            <span class="product-category">
+                Luxe Bites
+            </span>
+
+            <h3>
+                {{ biscuit.name }}
+            </h3>
+
+            <p>
+                {{ biscuit.description }}
+            </p>
+
+
+            <div class="product-bottom">
+
+                <span class="price">
+                    ₹{{ biscuit.price }}
+                </span>
+
+
+                {% if biscuit.stock > 0 and biscuit.available %}
+
+                    <a
+                        href="{% url 'biscuit_detail' biscuit.id %}"
+                        class="small-btn"
+                    >
+                        View →
+                    </a>
+
+                {% else %}
+
+                    <span class="disabled-btn">
+                        Unavailable
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+    {% empty %}
+
+    <div class="empty-state">
+
+        <div class="empty-icon">
+            🍪
+        </div>
+
+        <h3>
+            No biscuits available
+        </h3>
+
+        <p>
+            Please check again soon.
+        </p>
+
+    </div>
+
+    {% endfor %}
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        Luxe Bites
+        {% endblock %}
+    </title>
+
+    {% load static %}
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/style.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+    <div class="nav-container">
+
+        <a href="/" class="logo">
+
+        
+
+            <span>
+                Luxe <strong>Bites</strong>
+            </span>
+
+        </a>
+
+
+        <nav class="main-nav">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{% url 'biscuit_list' %}">
+                Biscuits
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'cart' %}" class="cart-link">
+
+                     Cart
+
+                </a>
+
+                <a href="{% url 'myorders' %}">
+                    My Orders
+                </a>
+
+                <span class="welcome-user">
+                    Hi, {{ user.username }}
+                </span>
+
+                <form
+                    method="post"
+                    action="{% url 'logout' %}"
+                    class="logout-form"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="logout-btn"
+                    >
+                        Logout
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <a
+                    href="{% url 'login' %}"
+                    class="login-link"
+                >
+                    Login
+                </a>
+
+                <a
+                    href="{% url 'register' %}"
+                    class="register-btn"
+                >
+                    Sign Up
+                </a>
+
+            {% endif %}
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+{% if messages %}
+
+<div class="messages-container">
+
+    {% for message in messages %}
+
+        <div class="message message-{{ message.tags }}">
+
+            <span>
+                {% if message.tags == 'success' %}
+                    ✓
+                {% elif message.tags == 'error' %}
+                    !
+                {% else %}
+                    ℹ
+                {% endif %}
+            </span>
+
+            {{ message }}
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+{% endif %}
+
+
+<main>
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-container">
+
+        <div>
+
+            <h3>
+                Luxe Bites
+            </h3>
+
+            <p>
+                Delicious moments, one biscuit at a time.
+            </p>
+
+        </div>
+
+        <div class="footer-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="{% url 'biscuit_list' %}">
+                Biscuits
+            </a>
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'cart' %}">
+                    Cart
+                </a>
+
+                <a href="{% url 'myorders' %}">
+                    My Orders
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 Luxe Bites · Made with 
+
+    </div>
+
+</footer>
+
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>
+

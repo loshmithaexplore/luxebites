@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Orders | Luxe Bites
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <span class="eyebrow">
+        Your History
+    </span>
+
+    <h2>My Orders </h2>
+
+    <p>
+        Track your Luxe Bites orders.
+    </p>
+
+</section>
+
+
+{% for order in orders %}
+
+<div class="order-card">
+
+    <div class="order-header">
+
+        <div>
+
+            <span class="order-label">
+                ORDER
+            </span>
+
+            <h3>
+                #{{ order.id }}
+            </h3>
+
+        </div>
+
+        <span class="status status-{{ order.status|lower }}">
+            {{ order.status }}
+        </span>
+
+    </div>
+
+
+    <div class="order-products">
+
+        {% for item in order.items.all %}
+
+        <div class="order-product">
+
+            <span>
+                🍪 {{ item.biscuit.name }}
+            </span>
+
+            <span>
+                × {{ item.quantity }}
+            </span>
+
+            <strong>
+                ₹{{ item.total_price }}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <div class="order-footer">
+
+        <span>
+            {{ order.created_at|date:"d M Y, h:i A" }}
+        </span>
+
+        <strong>
+            Total: ₹{{ order.total_amount }}
+        </strong>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<div class="empty-cart">
+
+    <div class="empty-cart-icon">
+        📦
+    </div>
+
+    <h2>No orders yet</h2>
+
+    <p>
+        Your delicious order history will appear here.
+    </p>
+
+    <a
+        href="{% url 'biscuit_list' %}"
+        class="primary-btn"
+    >
+        Start Shopping
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

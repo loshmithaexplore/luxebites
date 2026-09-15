@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Checkout | Luxe Bites
+{% endblock %}
+
+{% block content %}
+
+<section class="page-heading">
+
+    <span class="eyebrow">
+        Almost There
+    </span>
+
+    <h2>Checkout</h2>
+
+    <p>
+        Tell us where you'd like your biscuits delivered.
+    </p>
+
+</section>
+
+
+<section class="checkout-layout">
+
+    <div class="checkout-card">
+
+        <h3>Delivery Information</h3>
+
+        <form method="post">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+
+                <label for="address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    name="address"
+                    id="address"
+                    rows="6"
+                    placeholder="Enter your complete delivery address..."
+                    required
+                ></textarea>
+
+            </div>
+
+            <button
+                type="submit"
+                class="primary-btn full-btn"
+            >
+                🍪 Place Order
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <aside class="summary-card">
+
+        <h3>Order Total</h3>
+
+        <div class="summary-line total-line">
+
+            <span>Total</span>
+
+            <strong>
+                ₹{{ total }}
+            </strong>
+
+        </div>
+
+        <p class="secure-text">
+            🔒 Your order is safe with Luxe Bites.
+        </p>
+
+    </aside>
+
+</section>
+
+{% endblock %}
