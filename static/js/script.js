@@ -1,16 +1,6 @@
 
 console.log("Luxe Bites JavaScript loaded");
-/*
-const button = document.getElementById("welcomeBtn");
 
-const message = document.getElementById("message");
-
-button.addEventListener("click", function () {
-
-    message.textContent = "Welcome to Luxe Bites! 🍪";
-
-});
-*/
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -30,3 +20,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+
+
+/*
+const button = document.getElementById("welcomeBtn");
+
+const message = document.getElementById("message");
+
+button.addEventListener("click", function () {
+
+    message.textContent = "Welcome to Luxe Bites! 🍪";
+
+});
+*/

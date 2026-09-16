@@ -35,6 +35,12 @@ ALLOWED_HOSTS = os.environ.get(
     "localhost,127.0.0.1"
 ).split(",")
 
+
+# Django needs the *scheme* included here (unlike ALLOWED_HOSTS)
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:8000,http://127.0.0.1:8000"
+).split(",")
 # Application definition
 
 INSTALLED_APPS = [
