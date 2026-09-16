@@ -13,16 +13,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 load_dotenv(BASE_DIR / ".env")
 
-# SECURITY WARNING: don't run with debug turned on in production!
 SECRET_KEY = os.environ.get(
     "SECRET_KEY",
     "django-insecure-development-key"
@@ -33,13 +28,6 @@ DEBUG = os.environ.get("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.environ.get(
     "ALLOWED_HOSTS",
     "localhost,127.0.0.1"
-).split(",")
-
-
-# Django needs the *scheme* included here (unlike ALLOWED_HOSTS)
-CSRF_TRUSTED_ORIGINS = os.environ.get(
-    "CSRF_TRUSTED_ORIGINS",
-    "http://localhost:8000,http://127.0.0.1:8000"
 ).split(",")
 # Application definition
 
@@ -153,3 +141,5 @@ LOGIN_URL = '/accounts/login/'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
